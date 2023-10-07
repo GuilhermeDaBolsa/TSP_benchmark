@@ -43,10 +43,9 @@ foreach(var directory in sampleDirectories) {
     var sampleFiles = Directory.GetFiles(directory, "*.tsp");
 
     foreach(var file in sampleFiles) {
+        var TSP = TSPLibFileReader.Import(file);
 
-        Console.WriteLine(file);
-
-        //TSPLibFileReader.Import(directory, )
+        Console.WriteLine($"{TSP.name} - {TSP.size} cities (checksum {TSP.cities.Count})");
     }
 }
 
