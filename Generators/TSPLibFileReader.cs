@@ -3,20 +3,15 @@ using TSP_TESTS;
 
 public class TSPLibFileReader {
 
-
-    public static TSP Import(string fileFolderPath, string fileName) {
-
-        TSP tsp = new TSP();
-
-        ReadTSPFile(ref tsp, fileFolderPath, fileName);
-        ReadOptTourFile(ref tsp, fileFolderPath, fileName);
+    public static TSP Import(string fileCompletePath) {
+        var tsp = new TSP();
+        ReadTSPFile(ref tsp, fileCompletePath);
+        //ReadOptTourFile(ref tsp, fileFolderPath, fileName);
 
         return tsp;
     }
 
-    private static void ReadTSPFile(ref TSP tsp, string fileFolderPath, string fileName) {
-        string fileCompletePath = fileFolderPath + fileName + ".tsp";
-
+    private static void ReadTSPFile(ref TSP tsp, string fileCompletePath) {
         if (!File.Exists(fileCompletePath))
             throw new Exception("TSP file does not exist: " + fileCompletePath);
 
@@ -57,7 +52,7 @@ public class TSPLibFileReader {
                 case "TYPE": tsp.type = value; break;
                 case "COMMENT": break;
                 case "DIMENSION":
-                    tsp.size = int.Parse(value + 1);
+                    tsp.size = int.Parse(value);
                     tsp.cities = new List<TSP_City>(tsp.size);
                     break;
 
