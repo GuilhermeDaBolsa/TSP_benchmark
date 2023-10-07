@@ -6,12 +6,12 @@ namespace TSP_benchmark.Generators
     public class TSPLibFileWriter
     {
 
-        public static void WriteFile(string directory, string fileNamePrefix, int fileNumber, List<TSP_City> cities)
+        public static void WriteFile(string directory, string namePrefix, int fileNumber, List<TSP_City> cities)
         {
 
-            var fileName = $"{fileNamePrefix}_{cities.Count}_{fileNumber}";
+            var fileName = $"{namePrefix}_{cities.Count}_{fileNumber}";
 
-            using (StreamWriter writer = File.CreateText($"{directory}/{fileName}.txt"))
+            using (StreamWriter writer = File.CreateText($"{directory}/{fileName}.tsp"))
             {
                 writer.WriteLine($"NAME: {fileName}");
                 writer.WriteLine("TYPE: TSP");
