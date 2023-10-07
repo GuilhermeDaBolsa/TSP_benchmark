@@ -4,7 +4,7 @@ using TSP_benchmark.Generators;
 
 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
-string PROJECT_PATH = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+string PROJECT_PATH = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
 string TESTS_BASE_FOLDER = Path.Combine(PROJECT_PATH, "GeneratedTests");
 
 //-- WRITE TEST FILES --//
@@ -36,13 +36,13 @@ TSPLibFileWriter.WriteSamples(
 
 //-- READ TEST FILES --//
 
-var sample_directories = Directory.GetDirectories(TESTS_BASE_FOLDER);
+var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER);
 
-foreach(var directory in sample_directories) {
+foreach(var directory in sampleDirectories) {
 
-    var files = Directory.GetFiles(directory, "*.tsp");
+    var sampleFiles = Directory.GetFiles(directory, "*.tsp");
 
-    foreach(var file in files) {
+    foreach(var file in sampleFiles) {
 
         Console.WriteLine(file);
 
