@@ -1,10 +1,14 @@
 ﻿using System.Globalization;
+using System.IO;
 using TSP_benchmark.Generators;
 
 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
+string PROJECT_PATH = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+string TESTS_BASE_FOLDER = Path.Combine(PROJECT_PATH, "GeneratedTests");
 
-var BASE_DIR = "C:/Users/Guilh/Documents/CodeProjects/TSP_benchmark/GeneratedTests";
+//-- WRITE TEST FILES --//
+
 var TSP_FOLDER_PREFIX = "Random_";
 var TSP_FILE_PREFIX = "Random";
 
@@ -16,8 +20,9 @@ var NUMBER_OF_SAMPLES = 20;
 var MAX_CITY_X_COORD_PROPORTION = 3;
 var MAX_CITY_Y_COORD_PROPORTION = 3;
 
+/*
 TSPLibFileWriter.WriteSamples(
-    BASE_DIR,
+    TESTS_BASE_FOLDER,
     TSP_FOLDER_PREFIX,
     TSP_FILE_PREFIX,
     NUMBER_OF_SAMPLES,
@@ -25,4 +30,24 @@ TSPLibFileWriter.WriteSamples(
     MAX_TSP_SIZE,
     MAX_CITY_X_COORD_PROPORTION,
     MAX_CITY_Y_COORD_PROPORTION);
+*/
+
+
+
+//-- READ TEST FILES --//
+
+var sample_directories = Directory.GetDirectories(TESTS_BASE_FOLDER);
+
+foreach(var directory in sample_directories) {
+
+    var files = Directory.GetFiles(directory, "*.tsp");
+
+    foreach(var file in files) {
+
+        Console.WriteLine(file);
+
+        //TSPLibFileReader.Import(directory, )
+    }
+}
+
 
