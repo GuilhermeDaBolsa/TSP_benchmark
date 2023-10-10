@@ -34,7 +34,7 @@ TSPLibFileWriter.WriteSamples(
 
 //-- READ TEST FILES --//
 
-var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER);
+var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("14"));
 
 foreach(var directory in sampleDirectories) {
 
@@ -44,6 +44,8 @@ foreach(var directory in sampleDirectories) {
         var TSP = TSPLibFileReader.Import(file);
 
         Console.WriteLine($"{TSP.name} - {TSP.size} cities (checksum {TSP.cities.Count})");
+
+        var answer = BranchAndBoundBFS.Solve(TSP.cities);
     }
 }
 
