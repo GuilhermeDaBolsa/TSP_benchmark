@@ -1,6 +1,4 @@
 ﻿using System.Globalization;
-using System.IO;
-using TSP_benchmark.Generators;
 
 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 

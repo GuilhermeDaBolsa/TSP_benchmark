@@ -1,5 +1,4 @@
-﻿
-public class BinaryHeap<Key, Value> where Key : System.IComparable<Key> {
+﻿public class BinaryHeap<Key, Value> where Key : System.IComparable<Key> {
     public List<Node> heapArray;
 
     public BinaryHeap(int capacity) {

@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using TSP_TESTS;
 
 public class TSPLibFileReader {
 
