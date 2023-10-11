@@ -1,6 +1,6 @@
-﻿class BranchAndBoundBFS {
+﻿class BranchAndBoundBFS : Solver {
 
-    public static List<TSP_City> Solve(List<TSP_City> cities) {
+    public List<TSP_City> Solve(List<TSP_City> cities) {
 
         TreeOfPossibilities exploredNodes = new TreeOfPossibilities(cities.Count);
 

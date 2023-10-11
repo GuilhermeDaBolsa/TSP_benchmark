@@ -1,6 +1,6 @@
 ﻿/* THIS CODE IS MOSTLY FROM https://github.com/mikymaione/Held-Karp-algorithm */
 
-class Christofides {
+class Christofides : Solver {
 
     public List<TSP_City> Solve(List<TSP_City> cities) {
 

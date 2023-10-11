@@ -1,11 +1,11 @@
 ﻿/* THIS CODE IS MOSTLY FROM geeksforgeeks.org (Rohit Pradhan) */
 
-class BranchAndBoundDFS {
+class BranchAndBoundDFS : Solver {
 
-    static int N;
-    static int[] final_path;
-    static bool[] visited;
-    static float final_res;
+    int N;
+    int[] final_path;
+    bool[] visited;
+    float final_res;
 
     public List<TSP_City> Solve(List<TSP_City> cities) {
 
@@ -39,7 +39,7 @@ class BranchAndBoundDFS {
     }
 
 
-    static void TSP(float[,] adj) {
+    void TSP(float[,] adj) {
         int[] curr_path = new int[N + 1];
 
         float curr_bound = 0;
@@ -58,7 +58,7 @@ class BranchAndBoundDFS {
     }
 
 
-    static void TSPRec(float[,] adj, float curr_bound, float curr_weight, int level, int[] curr_path) {
+    void TSPRec(float[,] adj, float curr_bound, float curr_weight, int level, int[] curr_path) {
 
         if (level == N) {
             if (adj[curr_path[level - 1], curr_path[0]] != 0) {
@@ -100,7 +100,7 @@ class BranchAndBoundDFS {
     }
 
 
-    static void copyToFinal(int[] curr_path) {
+    void copyToFinal(int[] curr_path) {
         for (int i = 0; i < N; i++)
             final_path[i] = curr_path[i];
 
@@ -108,7 +108,7 @@ class BranchAndBoundDFS {
     }
 
 
-    static float firstMin(float[,] adj, int i) {
+    float firstMin(float[,] adj, int i) {
         float min = float.MaxValue;
 
         for (int k = 0; k < N; k++)
@@ -119,7 +119,7 @@ class BranchAndBoundDFS {
     }
 
 
-    static float secondMin(float[,] adj, int i) {
+    float secondMin(float[,] adj, int i) {
         float first = float.MaxValue;
         float second = float.MaxValue;
 
