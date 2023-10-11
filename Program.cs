@@ -33,7 +33,7 @@ TSPLibFileWriter.WriteSamples(
 
 
 
-var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("14")); //TODO REMOVE 'WHERE' FILTER (its just for testing)
+var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("14")); //TODO REMOVE 'WHERE' FILTER (its just for testing) (BUT BEFORE DOING IT... CHECK IF IT IS GENERATING THE CORECT ANSWER (compare with the unity version))
 
 var benchmarkers = new List<Benchmarker> {
     new Benchmarker("BranchAndBoundDFS", new BranchAndBoundDFS()),

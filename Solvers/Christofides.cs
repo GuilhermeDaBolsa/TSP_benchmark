@@ -79,8 +79,8 @@ class Christofides : Solver {
 
         E.Add(0);
 
-        //E IS THE ANSWER HERE
-        return null;
+        //E IS THE ANSWER HERE... BUT ONLY INDEXES (TODO idk if it works without 'new' keyword)
+        return E.Select(e => cities[e]).ToList();
     }
 
 
