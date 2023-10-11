@@ -18,7 +18,8 @@ var NUMBER_OF_SAMPLES = 20;
 var MAX_CITY_X_COORD_PROPORTION = 3;
 var MAX_CITY_Y_COORD_PROPORTION = 3;
 
-/*
+//COMMENTED BCAUSE TESTS WERE ALREADY GENERATED
+/* 
 TSPLibFileWriter.WriteSamples(
     TESTS_BASE_FOLDER,
     TSP_FOLDER_PREFIX,
@@ -32,21 +33,25 @@ TSPLibFileWriter.WriteSamples(
 
 
 
-//-- READ TEST FILES --//
+var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("14")); //TODO REMOVE 'WHERE' FILTER (its just for testing)
 
-var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("14"));
+var benchmarkers = new List<Benchmarker> {
+    new Benchmarker("BranchAndBoundDFS", new BranchAndBoundDFS()),
+    new Benchmarker("BranchAndBoundBFS", new BranchAndBoundBFS()),
+    new Benchmarker("Christofides", new Christofides())
+};
 
-foreach(var directory in sampleDirectories) {
+foreach (var directory in sampleDirectories) {
 
     var sampleFiles = Directory.GetFiles(directory, "*.tsp");
 
-    foreach(var file in sampleFiles) {
+    benchmarkers.ForEach(benchmarker
+        => Directory.CreateDirectory($"{directory}/{benchmarker.name}"));
+
+    foreach (var file in sampleFiles) {
         var TSP = TSPLibFileReader.Import(file);
 
-        Console.WriteLine($"{TSP.name} - {TSP.size} cities (checksum {TSP.cities.Count})");
-
-        var answer = BranchAndBoundBFS.Solve(TSP.cities);
+        benchmarkers.ForEach(benchmarker
+            => benchmarker.RunBenchmark(TSP, $"{directory}/{benchmarker.name}/{TSP.name}.ans"));
     }
 }
-
-
