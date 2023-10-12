@@ -12,28 +12,29 @@ var TSP_FILE_PREFIX = "Random";
 
 var MIN_TSP_SIZE = 5;
 var MAX_TSP_SIZE = 100;
+var TSP_SIZE_STEP = 5;
 
-var NUMBER_OF_SAMPLES = 20;
+var NUMBER_OF_SAMPLES = 5;
 
 var MAX_CITY_X_COORD_PROPORTION = 3;
 var MAX_CITY_Y_COORD_PROPORTION = 3;
 
-//COMMENTED BCAUSE TESTS WERE ALREADY GENERATED
-/* 
-TSPLibFileWriter.WriteSamples(
-    TESTS_BASE_FOLDER,
-    TSP_FOLDER_PREFIX,
-    TSP_FILE_PREFIX,
-    NUMBER_OF_SAMPLES,
-    MIN_TSP_SIZE,
-    MAX_TSP_SIZE,
-    MAX_CITY_X_COORD_PROPORTION,
-    MAX_CITY_Y_COORD_PROPORTION);
-*/
+//COMMENT IF TESTS WERE ALREADY GENERATED
+
+//TSPLibFileWriter.WriteSamples(
+//    TESTS_BASE_FOLDER,
+//    TSP_FOLDER_PREFIX,
+//    TSP_FILE_PREFIX,
+//    NUMBER_OF_SAMPLES,
+//    MIN_TSP_SIZE,
+//    MAX_TSP_SIZE,
+//    TSP_SIZE_STEP,
+//    MAX_CITY_X_COORD_PROPORTION,
+//    MAX_CITY_Y_COORD_PROPORTION);
 
 
 
-var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("14")); //TODO REMOVE 'WHERE' FILTER (its just for testing) (BUT BEFORE DOING IT... CHECK IF IT IS GENERATING THE CORECT ANSWER (compare with the unity version))
+var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("15")); //TODO REMOVE 'WHERE' FILTER (its just for testing) (BUT BEFORE DOING IT... CHECK IF IT IS GENERATING THE CORECT ANSWER (compare with the unity version))
 
 var benchmarkers = new List<Benchmarker> {
     new Benchmarker("BranchAndBoundDFS", new BranchAndBoundDFS()),

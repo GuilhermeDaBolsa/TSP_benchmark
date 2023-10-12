@@ -31,11 +31,12 @@
         int NUM_OF_SAMPLES,
         int MIN_SAMPLE_SIZE,
         int MAX_SAMPLE_SIZE,
+        int TSP_SIZE_STEP,
         float MAX_SAMPLE_X_COORD_PROPORTION,
         float MAX_SAMPLE_Y_COORD_PROPORTION
     )
     {
-        for (int tspSize = MIN_SAMPLE_SIZE; tspSize <= MAX_SAMPLE_SIZE; tspSize++)
+        for (int tspSize = MIN_SAMPLE_SIZE; tspSize <= MAX_SAMPLE_SIZE; tspSize += TSP_SIZE_STEP)
         {
             var newDirectory = $"{SAMPLES_BASE_DIR}/{SAMPLES_FOLDER_PREFIX}{tspSize}";
             Directory.CreateDirectory(newDirectory);
