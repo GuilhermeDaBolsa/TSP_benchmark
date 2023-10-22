@@ -34,12 +34,15 @@ var MAX_CITY_Y_COORD_PROPORTION = 3;
 
 
 
-var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(name => name.Contains("15")); //TODO REMOVE 'WHERE' FILTER (its just for testing) (BUT BEFORE DOING IT... CHECK IF IT IS GENERATING THE CORECT ANSWER (compare with the unity version))
+var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).ToList();
+
+//SORTING SAMPLES DIRECTORIES IN ORDER OF INSTANCE SIZES
+sampleDirectories.Sort((x, y) => Int32.Parse(x.Substring(x.LastIndexOf("_")+1)) - Int32.Parse(y.Substring(y.LastIndexOf("_")+1)));
 
 var benchmarkers = new List<Benchmarker> {
     new Benchmarker("BranchAndBoundDFS", new BranchAndBoundDFS()),
-    new Benchmarker("BranchAndBoundBFS", new BranchAndBoundBFS()),
-    new Benchmarker("Christofides", new Christofides())
+    //new Benchmarker("BranchAndBoundBFS", new BranchAndBoundBFS()),
+    //new Benchmarker("Christofides", new Christofides())
 };
 
 foreach (var directory in sampleDirectories) {
