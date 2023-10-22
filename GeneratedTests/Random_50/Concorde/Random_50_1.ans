@@ -1,5 +1,7 @@
-0.10
-827
+NAME: Random_50_1
+ELLAPSED_TIME_(ms): 100
+TOUR_SIZE: 827
+TOUR_SECTION
 0
 34
 36
@@ -50,3 +52,5 @@
 2
 28
 1
+0
+EOF

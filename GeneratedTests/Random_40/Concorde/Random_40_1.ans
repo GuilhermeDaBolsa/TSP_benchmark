@@ -1,5 +1,7 @@
-0.04
-627
+NAME: Random_40_1
+ELLAPSED_TIME_(ms): 40
+TOUR_SIZE: 627
+TOUR_SECTION
 0
 32
 38
@@ -40,3 +42,5 @@
 5
 21
 19
+0
+EOF

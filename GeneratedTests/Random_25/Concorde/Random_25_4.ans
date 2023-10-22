@@ -1,5 +1,7 @@
-0.05
-331
+NAME: Random_25_4
+ELLAPSED_TIME_(ms): 50
+TOUR_SIZE: 331
+TOUR_SECTION
 0
 24
 10
@@ -25,3 +27,5 @@
 19
 9
 1
+0
+EOF

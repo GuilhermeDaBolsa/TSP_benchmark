@@ -1,5 +1,7 @@
-0.01
-333
+NAME: Random_25_2
+ELLAPSED_TIME_(ms): 10
+TOUR_SIZE: 333
+TOUR_SECTION
 0
 16
 9
@@ -25,3 +27,5 @@
 12
 1
 2
+0
+EOF

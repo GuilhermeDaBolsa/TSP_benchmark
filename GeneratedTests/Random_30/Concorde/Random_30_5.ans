@@ -1,5 +1,7 @@
-0.08
-383
+NAME: Random_30_5
+ELLAPSED_TIME_(ms): 80
+TOUR_SIZE: 383
+TOUR_SECTION
 0
 5
 1
@@ -30,3 +32,5 @@
 11
 8
 18
+0
+EOF
