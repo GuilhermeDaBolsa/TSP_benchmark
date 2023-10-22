@@ -36,8 +36,10 @@ var MAX_CITY_Y_COORD_PROPORTION = 3;
 
 var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).ToList();
 
+sampleDirectories = sampleDirectories.Where(d => d.EndsWith("_15")).ToList();
+
 //SORTING SAMPLES DIRECTORIES IN ORDER OF INSTANCE SIZES
-sampleDirectories.Sort((x, y) => Int32.Parse(x.Substring(x.LastIndexOf("_")+1)) - Int32.Parse(y.Substring(y.LastIndexOf("_")+1)));
+//sampleDirectories.Sort((x, y) => Int32.Parse(x.Substring(x.LastIndexOf("_")+1)) - Int32.Parse(y.Substring(y.LastIndexOf("_")+1)));
 
 var benchmarkers = new List<Benchmarker> {
     new Benchmarker("BranchAndBoundDFS", new BranchAndBoundDFS()),
