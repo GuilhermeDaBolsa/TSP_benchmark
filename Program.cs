@@ -1,9 +1,12 @@
 ﻿using System.Globalization;
+using System.Text;
 
 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
 string PROJECT_PATH = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
 string TESTS_BASE_FOLDER = Path.Combine(PROJECT_PATH, "GeneratedTests");
+
+
 
 //-- WRITE TEST FILES --//
 
@@ -36,10 +39,12 @@ var MAX_CITY_Y_COORD_PROPORTION = 3;
 
 
 
+
+
 //-- RUN BENCHMARKS ON TEST FILES (AND SAVE RESULTS) --//
 //COMMENT IF RESULTS WERE ALREADY GENERATED
 
-var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).ToList();
+/*var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).ToList();
 
 sampleDirectories = sampleDirectories.Where(d => d.EndsWith("_20")).ToList();
 
@@ -65,70 +70,51 @@ foreach (var directory in sampleDirectories) {
         benchmarkers.ForEach(benchmarker
             => benchmarker.RunBenchmark(TSP, $"{directory}/{benchmarker.name}/{TSP.name}.ans"));
     }
-}
+}*/
 
 
 
 
+/*
+ * EXPORT DATA TO CSV
+ */
 
+using (StreamWriter writer = File.CreateText($"{TESTS_BASE_FOLDER}/results.csv")) {
+    var methods = new List<string> { "Concorde", "Christofides", "Best-Bound", "Depth-First" };
+    var methodsDirs = new List<string> { "Concorde", "Christofides", "BranchAndBoundBFS", "BranchAndBoundDFS" };
 
-//-- FORMAT CONCORDE DATA --//
+    writer.WriteLine($",{string.Join(",,", methods)},,");
+    writer.WriteLine($",{string.Concat(Enumerable.Repeat("Tempo (ms),Tamanho,", methods.Count))}");
 
-/*var sampleDirectories = Directory.GetDirectories(TESTS_BASE_FOLDER).Where(d => Int32.Parse(d.Substring(d.LastIndexOf("_") + 1)) > 30).ToList();
-sampleDirectories.Sort((x, y) => Int32.Parse(x.Substring(x.LastIndexOf("_") + 1)) - Int32.Parse(y.Substring(y.LastIndexOf("_") + 1)));
+    for (int tspSize = MIN_TSP_SIZE; tspSize <= MAX_TSP_SIZE; tspSize += TSP_SIZE_STEP) {
 
-var concordeDirectories = 
-    sampleDirectories
-        .Select(d => Directory.Exists($"{d}/Concorde") ? $"{d}/Concorde" : "REMOVE")
-        .Where(cd => cd != "REMOVE")
-        .ToList();
+        for(int i = 0; i < NUMBER_OF_SAMPLES; i++) {
+            var sb = new StringBuilder();
 
+            sb.Append($"{TSP_FOLDER_PREFIX}{tspSize}_{i+1},");
 
-concordeDirectories.ForEach(cd => {
+            var instanceOfNSizeDir = $"{TESTS_BASE_FOLDER}/{TSP_FOLDER_PREFIX}{tspSize}";
 
-    var sampleFiles = Directory.GetFiles(cd, "*.ans");
+            methodsDirs.ForEach(methodDir => {
 
-    foreach (var sampleFile in sampleFiles) {
+                string timeInMs = "";
+                string size = "";
 
-        if (!File.Exists(sampleFile))
-            return;
+                if (File.Exists($"{instanceOfNSizeDir}/{methodDir}/{TSP_FOLDER_PREFIX}{tspSize}_{i + 1}.ans")) {
+                    IEnumerable<string> lines = File.ReadLines($"{instanceOfNSizeDir}/{methodDir}/{TSP_FOLDER_PREFIX}{tspSize}_{i + 1}.ans");
+                    var linesIterator = lines.GetEnumerator();
+                    linesIterator.MoveNext();
+                    linesIterator.MoveNext();
+                    timeInMs = linesIterator.Current.Split(':')[1].Trim();
+                    linesIterator.MoveNext();
+                    size = linesIterator.Current.Split(':')[1].Trim();
+                }
+                
+                sb.Append($"{timeInMs},");
+                sb.Append($"{size},");
+            });
 
-        var fileNameAndExtension = sampleFile.Substring(sampleFile.LastIndexOf("Random"));
-
-        var fileName = fileNameAndExtension.Substring(0, fileNameAndExtension.Length - 4);
-
-        IEnumerable<string> lines = File.ReadLines(sampleFile);
-        var linesIterator = lines.GetEnumerator();
-        linesIterator.MoveNext();
-
-        float timeInSec = float.Parse(linesIterator.Current);
-        long timeInMs = (long)(timeInSec * 1000);
-
-        linesIterator.MoveNext();
-
-        int size = int.Parse(linesIterator.Current);
-        var indexes = new List<int>(size);
-
-        while (linesIterator.MoveNext()) {
-            if(!string.IsNullOrWhiteSpace(linesIterator.Current))
-                indexes.Add(int.Parse(linesIterator.Current));
-        }
-
-        indexes.Add(0);
-
-        //WRITE FILE
-        using (StreamWriter writer = File.CreateText(sampleFile)) {
-            writer.WriteLine($"NAME: {fileName}");
-            writer.WriteLine($"ELLAPSED_TIME_(ms): {timeInMs}");
-            writer.WriteLine($"TOUR_SIZE: {size}");
-            writer.WriteLine("TOUR_SECTION");
-
-            for (int i = 0; i < indexes.Count; i++) {
-                writer.WriteLine($"{indexes[i]}");
-            }
-
-            writer.WriteLine("EOF");
+            writer.WriteLine(sb.ToString());
         }
     }
-});
-*/
+}
